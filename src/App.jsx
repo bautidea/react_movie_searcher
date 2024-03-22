@@ -7,8 +7,8 @@ const apiKey = import.meta.env.VITE_API_KEY
 const MOVIE_ENDPOINT_SEARCH = `http://www.omdbapi.com/?apikey=${apiKey}&`
 
 function App() {
-  const moviesRes = movieResponse.Search
-  const hasMovies = moviesRes.length > 0
+  const moviesRes = movieNoResponse.Search
+  const hasMovies = moviesRes?.length > 0
 
   return (
     <>
@@ -33,17 +33,24 @@ function App() {
 
         <main>
           {
-            hasMovies && 
+            hasMovies 
+            
+            && 
 
             <ul>
               {moviesRes.map((movie) => (
                 <li key={movie.imdbID}>
                   <h2>{movie.Title}</h2>
+                  <p>{movie.Year}</p>
                   <img src={movie.Poster} alt={`${movie.Title} Poster`}/>
                 </li>
                 ))
               }
             </ul>
+
+            ||
+
+            <h2>No Movies Found</h2>
           }
         </main>
       </div>
