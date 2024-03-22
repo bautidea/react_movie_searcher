@@ -1,26 +1,14 @@
 import { useState } from 'react'
 import './App.css'
+import movieResponse from './mocks/response.json' // --> https://www.omdbapi.com/?apiKey={apiKey}&s=Star
+import movieNoResponse from './mocks/no-response.json'
 
 const apiKey = import.meta.env.VITE_API_KEY
 const MOVIE_ENDPOINT_SEARCH = `http://www.omdbapi.com/?apikey=${apiKey}&`
 
 function App() {
-  // State to store movie name to search.
-  const [ movieToSearch, setMovieToSearch ] = useState()
-
-  useState( () => {
-    if (!movieToSearch) return 
-
-    fetch(`${MOVIE_ENDPOINT_SEARCH}t=${movieToSearch}`)
-    .then((res) => {
-      return res.json()
-    })
-    .then((data) => console.log(data))
-  }, [movieToSearch])
-
-  const handleClick = () => {
-
-  }
+  const moviesRes = movieResponse.Search
+  const hasMovies = moviesRes.length > 0
 
   return (
     <>
@@ -33,10 +21,10 @@ function App() {
 
             <label className='label'>
                 <p>Movie Name:</p>
-                <input value={movieToSearch} type='text' placeholder='Avengers, Star Wars, ...'/>
+                <input type='text' placeholder='Avengers, Star Wars, ...'/>
             </label>
 
-            <button type='submit' onClick={handleClick} >
+            <button type='submit'>
               Search
             </button>
 
@@ -44,7 +32,19 @@ function App() {
         </header>
 
         <main>
-          Resultados
+          {
+            hasMovies && 
+
+            <ul>
+              {moviesRes.map((movie) => (
+                <li key={movie.imdbID}>
+                  <img src={movie.Poster} alt={`${movie.Title} Poster`}/>
+                  <p>{movie.Title}</p>
+                </li>
+                ))
+              }
+            </ul>
+          }
         </main>
       </div>
     </>
