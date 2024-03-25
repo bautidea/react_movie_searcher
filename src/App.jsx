@@ -1,14 +1,9 @@
-import { useState } from 'react'
 import './App.css'
-import movieResponse from './mocks/response.json' // --> https://www.omdbapi.com/?apiKey={apiKey}&s=Star
-import movieNoResponse from './mocks/no-response.json'
-
-const apiKey = import.meta.env.VITE_API_KEY
-const MOVIE_ENDPOINT_SEARCH = `http://www.omdbapi.com/?apikey=${apiKey}&`
+import useMovies from './hooks/useMovies'
+import ShowMovies from './components/ShowMovies'
 
 function App() {
-  const moviesRes = movieNoResponse.Search
-  const hasMovies = moviesRes?.length > 0
+  const { movie, updateMovie } = useMovies()
 
   return (
     <>
@@ -32,26 +27,7 @@ function App() {
         </header>
 
         <main>
-          {
-            hasMovies 
-            
-            && 
-
-            <ul>
-              {moviesRes.map((movie) => (
-                <li key={movie.imdbID}>
-                  <h2>{movie.Title}</h2>
-                  <p>{movie.Year}</p>
-                  <img src={movie.Poster} alt={`${movie.Title} Poster`}/>
-                </li>
-                ))
-              }
-            </ul>
-
-            ||
-
-            <h2>No Movies Found</h2>
-          }
+          <ShowMovies mappedMovies={movie}/>
         </main>
       </div>
     </>
