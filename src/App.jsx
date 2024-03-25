@@ -4,7 +4,7 @@ import ShowMovies from './components/ShowMovies'
 
 function App() {
   const { movie, updateMovie } = useMovies()
-
+  console.log(movie);
   return (
     <>
       <div className='page'>

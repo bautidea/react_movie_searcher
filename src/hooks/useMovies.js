@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import searchMovie from '../services/searchMovie'
 
 const useMovies = () => {
-  const [ movieToSearch, setMovieToSearch] = useState()
+  const [ movieToSearch, setMovieToSearch] = useState('Star')
   const [ movieResult, setMovieResult ] = useState({})
 
   const updateMovie = ( newMovie ) => {
