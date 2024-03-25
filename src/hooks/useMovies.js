@@ -3,7 +3,7 @@ import searchMovie from '../services/searchMovie'
 
 const useMovies = () => {
   const [ movieToSearch, setMovieToSearch] = useState('Star')
-  const [ movieResult, setMovieResult ] = useState({})
+  const [ movieResult, setMovieResult ] = useState()
 
   const updateMovie = ( newMovie ) => {
     setMovieToSearch((prevMovie) => newMovie)
