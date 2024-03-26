@@ -10,7 +10,7 @@ const searchMovie = async (movieName) => {
         id: movie.imdbID,
         title: movie.Title,
         year: movie.Year,
-        poster: movie.Poster
+        poster: movie.Poster,
     }))
 
     return mappedMovies
