@@ -4,8 +4,27 @@ import ShowMovies from './components/ShowMovies'
 import useForm from './hooks/useForm'
 
 function App() {
-  const  { value, error, handleSubmit, handleChange, onFocus, onBlur } = useForm()
+  const  { value, error, setValue, setFocused } = useForm()
   const { movie } = useMovies(value)
+
+  // Handling form in a 'controlled' way, because React is controlling the state.
+  // In this way its easier to perform form validation.
+  function handleSubmit (event) {
+    event.preventDefault()
+    console.log({ value });
+  }
+
+  function handleChange (event) {
+    setValue(event.target.value)
+  }
+
+  function onFocus () {
+    setFocused(true)
+  }
+
+  function onBlur () {
+    setFocused(false)
+  }
 
   return (
     <>

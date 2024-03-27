@@ -5,25 +5,6 @@ const useForm = () => {
   const [ error, setError ] = useState(null)
   const [ focused, setFocused ] = useState(false)
 
-  // Handling form in a 'controlled' way, because React is controlling the state.
-  // In this way its easier to perform form validation.
-  function handleSubmit (event) {
-    event.preventDefault()
-    console.log({ value });
-  }
-
-  function handleChange (event) {
-    setValue(event.target.value)
-  }
-
-  function onFocus () {
-    setFocused(true)
-  }
-
-  function onBlur () {
-    setFocused(false)
-  }
-
   // Using an Effect hook to preform validations.
   useEffect(() => {
     if (value.startsWith(' ') && focused) {
@@ -45,7 +26,7 @@ const useForm = () => {
 
   }, [value])
 
-  return { value, error, handleSubmit, handleChange, onFocus, onBlur }
+  return { value, error, setValue, setFocused }
 }
 
 export default useForm
