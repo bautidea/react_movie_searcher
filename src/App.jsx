@@ -4,7 +4,7 @@ import ShowMovies from './components/ShowMovies'
 import useForm from './hooks/useForm'
 
 function App() {
-  const  { value, error, setValue, setFocused } = useForm()
+  const  { value, error, setValue } = useForm()
   const { movie } = useMovies(value)
 
   // Handling form in a 'controlled' way, because React is controlling the state.
@@ -18,14 +18,6 @@ function App() {
     setValue(event.target.value)
   }
 
-  function onFocus () {
-    setFocused(true)
-  }
-
-  function onBlur () {
-    setFocused(false)
-  }
-
   return (
     <>
       <div className='page'>
@@ -37,10 +29,10 @@ function App() {
 
             <label className='label'>
                 <p>Movie Name:</p>
-                <input value={value} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} type='text' placeholder='Avengers, Star Wars, ...'/>
+                <input value={value} onChange={handleChange} type='text' placeholder='Avengers, Star Wars, ...'/>
             </label>
             
-            <button type='submit' disabled={error !== null || value.length === 0}>
+            <button type='submit' disabled={error || value.length === 0}>
               Search
             </button>
 

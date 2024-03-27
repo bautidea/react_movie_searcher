@@ -1,32 +1,37 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const useForm = () => {
   const [ value, setValue ] = useState('')
   const [ error, setError ] = useState(null)
-  const [ focused, setFocused ] = useState(false)
+  const isFirstInput = useRef(true)
 
   // Using an Effect hook to preform validations.
   useEffect(() => {
-    if (value.startsWith(' ') && focused) {
+    if (isFirstInput.current) {
+      isFirstInput.current = value === ''
+      return
+    }
+
+    if (value.startsWith(' ')) {
       setError('Movie name cannot start with an empty space')
       return
     }
 
-    else if (value === '' && focused) {
+    if (value === '') {
       setError('Movie name cannot be empty')
       return
     }
 
-    else if (value.length < 3 && focused) {
+    if (value.length < 3) {
       setError('Movie name must have more than 3 characters')
       return
     }
 
-    else setError(null)
+    setError(null)
 
   }, [value])
 
-  return { value, error, setValue, setFocused }
+  return { value, error, setValue }
 }
 
 export default useForm
