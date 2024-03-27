@@ -1,22 +1,11 @@
 import './App.css'
-import { useState } from 'react'
 import useMovies from './hooks/useMovies'
 import ShowMovies from './components/ShowMovies'
+import useForm from './hooks/useForm'
 
 function App() {
-  const { movie } = useMovies('Star')
-  const [ value, setValue ] = useState('')
-
-  // Handling form in a 'controlled' way, because React is controlling the state.
-  // In this way its easier to perform form validation.
-  function handleSubmit (event) {
-    event.preventDefault()
-    console.log({ value });
-  }
-
-  function handleChange (event) {
-    setValue(event.target.value)
-  }
+  const  { value, error, handleSubmit, handleChange, onFocus, onBlur } = useForm()
+  const { movie } = useMovies(value)
 
   return (
     <>
@@ -29,14 +18,15 @@ function App() {
 
             <label className='label'>
                 <p>Movie Name:</p>
-                <input value={value} onChange={handleChange} type='text' placeholder='Avengers, Star Wars, ...'/>
+                <input value={value} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} type='text' placeholder='Avengers, Star Wars, ...'/>
             </label>
-
-            <button type='submit'>
+            
+            <button type='submit' disabled={error !== null || value.length === 0}>
               Search
             </button>
 
           </form>
+            {error && <p style={{color:'red'}}>{error}</p>}
         </header>
 
         <main>
