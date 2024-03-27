@@ -2,6 +2,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .page {
@@ -34,4 +35,35 @@ main {
     align-items: center;
     justify-content: center;
     gap: 1rem;
+}
+
+.movieContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    padding: 0;
+    margin: 25px 0 0;
+}
+
+@media screen and (max-width: 800px) {
+    .movieContainer {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+    }
+}
+
+.movieItem {
+    list-style-type: none;
+    max-height: 615px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.moviePoster {
+    margin-top: 2rem;
+    max-width: 20rem;
+    height: auto;
 }

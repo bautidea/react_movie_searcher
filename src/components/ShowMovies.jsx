@@ -8,13 +8,16 @@ const ShowMovies = ({ mappedMovies }) => {
 
         &&
 
-        <ul>
+        <ul className='movieContainer'>
           {
             mappedMovies.map((movie) => (
-              <li key={movie.id}>
-                <h2>{movie.title}</h2>
-                <p>{movie.year}</p>
-                <img src={movie.poster} alt={`${movie.title} Poster`} />
+              <li key={movie.id} className="movieItem">
+                <div className="movieInfo">
+                  <h2>{movie.title}</h2>
+                  <p>{movie.year}</p>
+                </div>
+
+                <img src={movie.poster} alt={`${movie.title} Poster`} className="moviePoster"/>
               </li>
             ))
           }
