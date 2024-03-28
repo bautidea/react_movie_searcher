@@ -4,14 +4,14 @@ import ShowMovies from './components/ShowMovies'
 import useForm from './hooks/useForm'
 
 function App() {
+  const { movie, setMovieToSearch } = useMovies()
   const  { value, error, setValue } = useForm()
-  const { movie } = useMovies(value)
 
   // Handling form in a 'controlled' way, because React is controlling the state.
   // In this way its easier to perform form validation.
   function handleSubmit (event) {
     event.preventDefault()
-    console.log({ value });
+    setMovieToSearch(value)
   }
 
   function handleChange (event) {

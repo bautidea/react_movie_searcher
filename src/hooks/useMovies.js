@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import searchMovie from '../services/searchMovie'
 
-const useMovies = (movieToSearch) => {
+const useMovies = () => {
+  const [ movieToSearch, setMovieToSearch ] = useState('')
   const [ movieResult, setMovieResult ] = useState()
 
   useEffect(() => {
@@ -10,7 +11,7 @@ const useMovies = (movieToSearch) => {
     searchMovie(movieToSearch).then(setMovieResult)
   }, [movieToSearch])
 
-  return { movie : movieResult }
+  return { movie : movieResult, setMovieToSearch }
 }
 
 export default useMovies

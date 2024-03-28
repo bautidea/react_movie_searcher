@@ -2,7 +2,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 120rem;
+    width: 100%;
 }
 
 .page {
@@ -11,6 +11,7 @@ main {
     align-items: center;
     justify-content: center;
     width: 100%;
+    max-width: 1945px;
 }
 
 .header {
@@ -39,32 +40,11 @@ main {
 
 .movieContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     gap: 30px;
     padding: 0;
-    margin: 25px 0 0;
-    max-width: 75%;
-}
-
-@media screen and (max-width: 1445px) {
-    .movieContainer {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .movieContainer {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .movieContainer {
-        display: flex;
-        flex-direction: column;
-        justify-items: center;
-        align-items: center;
-    }
+    margin: 25px 10rem 0;
 }
 
 .movieItem {
@@ -76,6 +56,7 @@ main {
 
 .moviePoster {
     width: 100%;
+    max-width: 450px;
     height: 25rem;
     border-radius: 10px;
     margin: 0;
