@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 const ShowMovies = ({ mappedMovies}) => {
   const hasMovies = mappedMovies?.length > 0
 
