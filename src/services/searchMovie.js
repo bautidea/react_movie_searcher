@@ -5,7 +5,7 @@ const searchMovie = async (movieName) => {
     const response = await fetch(`${MOVIE_ENDPOINT_SEARCH}s=${movieName}`)
     const data = await response.json()
     const moviesRes =  data.Search
-    
+
     const mappedMovies = moviesRes?.map(movie => ({
         id: movie.imdbID,
         title: movie.Title,

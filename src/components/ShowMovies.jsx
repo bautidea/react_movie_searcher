@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
+import { useRef } from "react";
 
-const ShowMovies = ({ mappedMovies }) => {
+const ShowMovies = ({ mappedMovies}) => {
   const hasMovies = mappedMovies?.length > 0
 
   return (
@@ -35,17 +35,6 @@ const ShowMovies = ({ mappedMovies }) => {
       }
     </>
   );
-};
-
-ShowMovies.propTypes = {
-  mappedMovies: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      poster: PropTypes.string.isRequired,
-      year: PropTypes.number.isRequired,
-    })
-  ),
 };
 
 export default ShowMovies;

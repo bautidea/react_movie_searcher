@@ -41,7 +41,7 @@ function App() {
         </header>
 
         <main>
-          <ShowMovies mappedMovies={movie}/>
+          <ShowMovies mappedMovies={movie} />
         </main>
       </div>
     </>
