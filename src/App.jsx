@@ -4,14 +4,14 @@ import ShowMovies from './components/ShowMovies'
 import useForm from './hooks/useForm'
 
 function App() {
-  const { movie, setMovieToSearch } = useMovies()
-  const  { value, error, setValue } = useForm()
+  const  { value, formError, setValue } = useForm()
+  const { movie, isLoading,  getMovies } = useMovies({value})
 
   // Handling form in a 'controlled' way, because React is controlling the state.
   // In this way its easier to perform form validation.
   function handleSubmit (event) {
     event.preventDefault()
-    setMovieToSearch(value)
+    getMovies()
   }
 
   function handleChange (event) {
@@ -32,16 +32,20 @@ function App() {
                 <input value={value} onChange={handleChange} type='text' placeholder='Avengers, Star Wars, ...'/>
             </label>
             
-            <button type='submit' disabled={error || value.length === 0}>
+            <button type='submit' disabled={formError || value.length === 0}>
               Search
             </button>
 
           </form>
-            {error && <p style={{color:'red'}}>{error}</p>}
+            {formError && <p style={{color:'red'}}>{formError}</p>}
         </header>
 
         <main>
-          <ShowMovies mappedMovies={movie} />
+          { 
+            isLoading ? 
+            <p>Loading Movies...</p> : 
+            <ShowMovies mappedMovies={movie} />
+          }
         </main>
       </div>
     </>

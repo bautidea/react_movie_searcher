@@ -31,7 +31,7 @@ const useForm = () => {
 
   }, [value])
 
-  return { value, error, setValue }
+  return { value, formError : error, setValue }
 }
 
 export default useForm
