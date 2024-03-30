@@ -2,11 +2,13 @@ import './App.css'
 import useMovies from './hooks/useMovies'
 import ShowMovies from './components/ShowMovies'
 import useForm from './hooks/useForm'
+import { useState } from 'react'
 
 function App() {
-  const  { value, formError, setValue } = useForm()
-  const { movie, isLoading,  getMovies } = useMovies({value})
-
+  const [ sortMovies, setSortMovies ] = useState(false)
+  const { value, formError, setValue } = useForm()
+  const { movie, isLoading,  getMovies } = useMovies({ value, sortMovies })
+  
   // Handling form in a 'controlled' way, because React is controlling the state.
   // In this way its easier to perform form validation.
   function handleSubmit (event) {
@@ -16,6 +18,10 @@ function App() {
 
   function handleChange (event) {
     setValue(event.target.value) 
+  }
+
+  function handleSort () {
+    setSortMovies(!sortMovies)
   }
 
   return (
@@ -30,6 +36,11 @@ function App() {
             <label className='label'>
                 <p>Movie Name:</p>
                 <input value={value} onChange={handleChange} type='text' placeholder='Avengers, Star Wars, ...'/>
+
+                <label>
+                  <input type='checkbox' checked={sortMovies} onChange={handleSort}/>
+                  Sort by title 
+                </label>
             </label>
             
             <button type='submit' disabled={formError || value.length === 0}>
