@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import searchMovie from '../services/searchMovie'
 
-const useMovies = ({ value, sortMovies }) => {
+const useMovies = ({ value, sortTitle, sortYear }) => {
   const [ movieResult, setMovieResult ] = useState([])
   const [ isLoading, setIsLoading ] = useState(false)
   const [ error, setError ] = useState(null)
@@ -28,8 +28,16 @@ const useMovies = ({ value, sortMovies }) => {
     }
   }
 
-  const sortedMovies = sortMovies ? [...movieResult].sort(( a, b ) => a.title.localeCompare(b.title)) : [...movieResult]
+  let sortedMovies = [...movieResult]
 
+  if ( sortTitle ) {
+    sortedMovies.sort(( a, b ) => a.title.localeCompare(b.title))
+  }
+
+  if ( sortYear ) {
+    sortedMovies.sort(( a, b ) => a.year - b.year)
+  }
+  
   return { movie : sortedMovies, isLoading, getMovies }
 }
 

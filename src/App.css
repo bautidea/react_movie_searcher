@@ -38,6 +38,11 @@ main {
     gap: 1rem;
 }
 
+.filterLabel {
+    display: flex;
+    width: 400px;
+}
+
 .movieContainer {
     display: grid;
     width: 100%;

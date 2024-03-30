@@ -5,9 +5,11 @@ import useForm from './hooks/useForm'
 import { useState } from 'react'
 
 function App() {
-  const [ sortMovies, setSortMovies ] = useState(false)
+  const [ sortTitle, setSortTitle ] = useState(false)
+  const [ sortYear, setSortYear ] = useState(false)
+  
   const { value, formError, setValue } = useForm()
-  const { movie, isLoading,  getMovies } = useMovies({ value, sortMovies })
+  const { movie, isLoading,  getMovies } = useMovies({ value, sortTitle, sortYear })
   
   // Handling form in a 'controlled' way, because React is controlling the state.
   // In this way its easier to perform form validation.
@@ -20,8 +22,12 @@ function App() {
     setValue(event.target.value) 
   }
 
-  function handleSort () {
-    setSortMovies(!sortMovies)
+  function handleSortTitle () {
+    setSortTitle(!sortTitle)
+  }
+
+    function handleSortYear () {
+      setSortYear(!sortYear)
   }
 
   return (
@@ -36,12 +42,19 @@ function App() {
             <label className='label'>
                 <p>Movie Name:</p>
                 <input value={value} onChange={handleChange} type='text' placeholder='Avengers, Star Wars, ...'/>
-
-                <label>
-                  <input type='checkbox' checked={sortMovies} onChange={handleSort}/>
-                  Sort by title 
-                </label>
             </label>
+
+            <div className='filterLabel'>
+              <label className='label'>
+                <input type='checkbox' checked={sortTitle} onChange={handleSortTitle}/>
+                <p>Sort by title</p>
+              </label>
+              
+              <label className='label'>
+                <input type='checkbox' checked={sortYear} onChange={handleSortYear}/>
+                <p>Sort by year </p>
+              </label>
+            </div>
             
             <button type='submit' disabled={formError || value.length === 0}>
               Search
