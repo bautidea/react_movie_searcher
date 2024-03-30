@@ -15,7 +15,7 @@ function App() {
   }
 
   function handleChange (event) {
-    setValue(event.target.value)
+    setValue(event.target.value) 
   }
 
   return (
