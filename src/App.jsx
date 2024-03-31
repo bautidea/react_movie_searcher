@@ -2,7 +2,8 @@ import './App.css'
 import useMovies from './hooks/useMovies'
 import ShowMovies from './components/ShowMovies'
 import useForm from './hooks/useForm'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
+import debounce from 'just-debounce-it'
 
 function App() {
   const [ sortTitle, setSortTitle ] = useState(false)
@@ -11,6 +12,12 @@ function App() {
   const { value, formError, setValue } = useForm()
   const { movie, isLoading,  getMovies } = useMovies({ value, sortTitle, sortYear })
   
+  const debounceMovie = useCallback(
+    debounce((search) => {
+      getMovies({ search })
+    },500)
+    , [])
+
   // Handling form in a 'controlled' way, because React is controlling the state.
   // In this way its easier to perform form validation.
   function handleSubmit (event) {
@@ -19,7 +26,9 @@ function App() {
   }
 
   function handleChange (event) {
-    setValue(event.target.value) 
+    const newValue = event.target.value
+    setValue(newValue)
+    debounceMovie(newValue)
   }
 
   function handleSortTitle () {

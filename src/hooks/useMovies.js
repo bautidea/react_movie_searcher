@@ -16,9 +16,7 @@ const useMovies = ({ value, sortTitle, sortYear }) => {
   // Here i dont pass any dependencies because im just initializing the function.
   // This function will be executed every time it gets called in the 'App' component,
   // when submitting the form.
-  const getMovies = useCallback(() => {
-    async ({ search }) => {
-  
+  const getMovies = useCallback(async ({ search }) => {
       if ( search === previousMovie.current ) return
 
       try {
@@ -28,7 +26,7 @@ const useMovies = ({ value, sortTitle, sortYear }) => {
         setError(null)
 
         const newMovie = await searchMovie(search)
-        setMovieResult(newMovie)
+        if (newMovie) setMovieResult(newMovie)
 
       } catch (e) {
 
@@ -37,8 +35,7 @@ const useMovies = ({ value, sortTitle, sortYear }) => {
       } finally {
         setIsLoading(false)
       }
-    }
-  }, [])
+    }, [])
 
   // With useMemo we are avoiding to render sortedMovies when the movieResult hasn't changed.
   // The sorting logic i want to executed only when dependencies change.
@@ -49,7 +46,7 @@ const useMovies = ({ value, sortTitle, sortYear }) => {
       if ( sortTitle ) {
         sorted = sorted.sort(( a, b ) => a.title.localeCompare(b.title))
       }
-    
+
       if ( sortYear ) {
         sorted = sorted.sort(( a, b ) => a.year - b.year)
       }
