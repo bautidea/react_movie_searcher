@@ -15,7 +15,7 @@ function App() {
   // In this way its easier to perform form validation.
   function handleSubmit (event) {
     event.preventDefault()
-    getMovies()
+    getMovies({ search : value })
   }
 
   function handleChange (event) {
