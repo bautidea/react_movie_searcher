@@ -1,8 +1,11 @@
 # Movie Searcher
 This React App will search for movies, by connecting to an API.
 
+<div align='center' display='flex' flex-direction='row' width='100%'>
+<img src='./src/assets/git_img.png' width='50%' >
+</div>
+
 # Objective of the project:
-- An input and a button are needed to search for a movie.
 - The result of the API search is a list of movies that matched the requested search, and it shows movie title, year and the poster.
 - Movies should are displayed on a responsive grid.
 - Using a debounce so when user stops writing the movie gets searched.
