@@ -26,7 +26,7 @@ const useMovies = ({ value, sortTitle, sortYear }) => {
         setError(null)
 
         const newMovie = await searchMovie(search)
-        if (newMovie) setMovieResult(newMovie)
+        setMovieResult(newMovie)
 
       } catch (e) {
 

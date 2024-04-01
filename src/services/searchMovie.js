@@ -7,12 +7,18 @@ const searchMovie = async (movieName) => {
     const data = await response.json();
     const moviesRes = data.Search;
 
-    return moviesRes?.map((movie) => ({
-      id: movie.imdbID,
-      title: movie.Title,
-      year: movie.Year,
-      poster: movie.Poster,
-    }));
+    return (
+      moviesRes 
+      ? 
+      moviesRes?.map((movie) => ({
+        id: movie.imdbID,
+        title: movie.Title,
+        year: movie.Year,
+        poster: movie.Poster,
+      })) 
+      : 
+      []
+    )
   } catch (e) {
     throw new Error('Error searching movie title');
   }
